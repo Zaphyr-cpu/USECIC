@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Oposición USECIC | Formulario Oficial</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a1a1f; /* azul oscuro */
+  --bg2: #1b2a2f; /* azul/verde militar */
+  --card: #20333d; /* tarjeta verde oscuro */
+  --accent: #a6d608; /* verde neón */
+  --accent2: #ffd700; /* dorado para botones y highlights */
+  --text: #ecf0ff;
+  --muted: #9aa3c7;
+}
+
+* {margin:0; padding:0; box-sizing:border-box;}
+body {
+  font-family: Inter, sans-serif;
+  background: radial-gradient(circle at top, var(--bg2), var(--bg));
+  color: var(--text);
+  overflow-x: hidden;
+  padding: 40px 20px;
+}
+
+/* Animación entrada */
+@keyframes fadeInUp {
+  0% {opacity:0; transform: translateY(30px);}
+  100% {opacity:1; transform: translateY(0);}
+}
+
+h1, h2 {text-align:center; animation: fadeInUp 1s ease forwards;}
+h1 {
+  font-family: Orbitron;
+  color: var(--accent);
+  font-size: 3rem;
+  position: relative;
+  margin-bottom: 30px;
+}
+
+/* Circulo giratorio alrededor del título */
+.circular-text {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  animation: rotateCircle 10s linear infinite;
+}
+
+.circular-text span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform-origin: 0 90px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--accent2);
+}
+
+/* Calculamos la rotación con JS más abajo */
+@keyframes rotateCircle {
+  0% {transform: translate(-50%, -50%) rotate(0deg);}
+  100% {transform: translate(-50%, -50%) rotate(360deg);}
+}
+
+h2 {color: var(--accent2); font-size:2.5rem; margin-bottom:40px;}
+
+/* Caja principal */
+.box {
+  background: rgba(255,255,255,0.05);
+  border-radius: 25px;
+  padding: 40px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+  max-width: 1000px;
+  margin: auto;
+}
+
+/* Grid */
+.grid {display:grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap:25px;}
+
+/* Tarjetas */
+.card {
+  background: var(--card);
+  padding: 25px;
+  border-radius: 18px;
+  border:1px solid rgba(255,255,255,0.08);
+  transition: all 0.5s ease;
+  position: relative;
+}
+.card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 10px 30px rgba(255,215,0,0.3),0 5px 15px rgba(166,214,8,0.3);
+}
+
+.card h4 {color: var(--accent2); margin-bottom:12px; font-size:1.3rem;}
+.card p {color: var(--muted); line-height:1.4;}
+
+/* Inputs y botones */
+form input, form textarea, form button {
+  width:100%;
+  padding:14px;
+  margin:10px 0;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.2);
+  font-size:16px;
+  background: rgba(255,255,255,0.05);
+  color: var(--text);
+  transition: all 0.3s ease;
+}
+
+form input:focus, form textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+  outline:none;
+}
+
+form textarea {resize:none; min-height:70px;}
+
+form button {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color:#000;
+  font-weight:800;
+  border:none;
+  cursor:pointer;
+  font-size:1.2rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(255,215,0,0.4);
+}
+form button:hover {
+  opacity:0.95;
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(255,215,0,0.7),0 5px 20px rgba(166,214,8,0.5);
+}
+
+/* Mensaje éxito */
+#successMsg {
+  color: #43b581;
+  font-weight:700;
+  text-align:center;
+  display:none;
+  margin-top:20px;
+  font-size:1.2rem;
+}
+
+/* Responsive */
+@media(max-width:600px){
+  body{padding:20px;}
+  h1{font-size:2.5rem;}
+  h2{font-size:2rem;}
+}
+</style>
+</head>
+<body>
+
+<h1>Oposición
+  <div class="circular-text" id="circleText"></div>
+</h1>
+<h2>Formulario USECIC</h2>
+
+<div class="box">
+<form id="usecicForm" class="grid">
+
+  <!-- Datos personales IC -->
+  <div class="card">
+    <h4>Datos personales</h4>
+    <input required placeholder="Usuario Discord">
+    <input required placeholder="Nombre y apellidos">
+    <input required type="number" placeholder="Edad">
+    <input required placeholder="Nº de placa">
+    <input placeholder="Rango actual">
+    <input placeholder="Años en la Guardia Civil">
+    <input placeholder="Unidades anteriores">
+  </div>
+
+  <!-- Motivación -->
+  <div class="card">
+    <h4>Motivación</h4>
+    <textarea placeholder="¿Por qué quieres ingresar en USECIC?"></textarea>
+    <textarea placeholder="¿Qué puedes aportar a la unidad?"></textarea>
+    <textarea placeholder="¿Qué esperas aprender?"></textarea>
+  </div>
+
+  <!-- Trabajo en equipo -->
+  <div class="card">
+    <h4>Trabajo en equipo</h4>
+    <textarea placeholder="¿Qué haces si no estás de acuerdo con una orden?"></textarea>
+    <textarea placeholder="¿Cómo actúas ante un error de un compañero?"></textarea>
+    <textarea placeholder="Importancia de la cadena de mando"></textarea>
+  </div>
+
+  <!-- Ética y profesionalidad -->
+  <div class="card">
+    <h4>Ética y profesionalidad</h4>
+    <textarea placeholder="Reacción ante provocaciones"></textarea>
+    <textarea placeholder="Actuación con conocidos implicados"></textarea>
+    <textarea placeholder="Imagen y trato al ciudadano"></textarea>
+  </div>
+
+  <!-- Disponibilidad -->
+  <div class="card">
+    <h4>Disponibilidad</h4>
+    <input placeholder="Estado físico">
+    <input placeholder="Disponibilidad horaria">
+    <input placeholder="Aceptación disciplina estricta">
+  </div>
+
+  <!-- Declaración final -->
+  <div class="card">
+    <h4>Declaración final</h4>
+    <textarea required placeholder="Declaro que la información es veraz y acepto las normas USECIC"></textarea>
+    <input required placeholder="Firma IC">
+    <input type="date" required placeholder="Fecha IC">
+  </div>
+
+  <!-- Botón enviar -->
+  <button type="submit" class="card" style="grid-column:1/-1">ENVIAR SOLICITUD</button>
+
+  <!-- Confirmación -->
+  <div id="successMsg">✅ Solicitud enviada correctamente</div>
+
+</form>
+</div>
+
+<script>
+// Crear circular text
+const circle = document.getElementById('circleText');
+const text = " USECIC • USECIC • USECIC • USECIC • ";
+for(let i=0;i<text.length;i++){
+  const span = document.createElement('span');
+  span.innerText = text[i];
+  span.style.transform = `rotate(${i*15}deg)`;
+  circle.appendChild(span);
+}
+
+// Formulario
+const webhookURL = "https://discordapp.com/api/webhooks/1461089495402287115/T03cYHOGQDPgWQ8z9xNUEcgbJynLoGOrx752vbUR7e7UwCXj-ABZVD2ovfoFngy0xjwQ";
+
+document.getElementById("usecicForm").addEventListener("submit", async e=>{
+  e.preventDefault();
+  const inputs = [...e.target.querySelectorAll('input, textarea')];
+  
+  for(const i of inputs){
+    if(i.hasAttribute("required") && !i.value.trim()){
+      alert(`Por favor completa el campo: "${i.placeholder}"`);
+      i.focus();
+      return;
+    }
+  }
+
+  const dataText = inputs.map(i => `**${i.placeholder}:** ${i.value || "—"}`).join("\n");
+
+  try{
+    await fetch(webhookURL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        embeds:[{
+          title:"📋 Nueva oposición USECIC",
+          description:dataText,
+          color:3447003,
+          timestamp:new Date()
+        }]
+      })
+    });
+    document.getElementById("successMsg").style.display="block";
+    e.target.reset();
+    setTimeout(()=>document.getElementById("successMsg").style.display="none",5000);
+  } catch(err){
+    console.error("Error al enviar webhook:", err);
+    alert("❌ No se pudo enviar la solicitud. Revisa la consola.");
+  }
+});
+</script>
+
+</body>
+</html>
